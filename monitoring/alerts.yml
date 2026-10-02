@@ -1,0 +1,25 @@
+groups:
+  - name: taskflow
+    rules:
+      - alert: TaskFlowUnavailable
+        expr: up{job="taskflow-production"} == 0
+        for: 8s
+        labels:
+          severity: critical
+        annotations:
+          summary: 'TaskFlow production cannot be reached'
+          description: 'Inspect health endpoint and production log; restore previous release if needed.'
+      - alert: TaskFlowHighErrorRate
+        expr: sum(rate(taskflow_requests_total{status=~"5.."}[2m])) / clamp_min(sum(rate(taskflow_requests_total[2m])), 0.001) > 0.05
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: 'More than 5 percent of requests failed'
+      - alert: TaskFlowSlowResponses
+        expr: histogram_quantile(0.95, sum(rate(taskflow_request_seconds_bucket[2m])) by (le)) > 0.5
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: '95th percentile latency exceeds 500 milliseconds'
