@@ -34,4 +34,4 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(data[-20:], indent=2).encode())
 
 
-ThreadingHTTPServer(('127.0.0.1', 9094), Handler).serve_forever()
+ThreadingHTTPServer(('127.0.0.1', 9194), Handler).serve_forever()

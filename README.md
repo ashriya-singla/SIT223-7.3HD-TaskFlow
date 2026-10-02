@@ -61,7 +61,7 @@ lockfile versions or use online bootstrap. The Python wheel is portable; tool bi
 - Production: http://localhost:8102
 - Prometheus: http://localhost:9090 (query `up`, `taskflow_requests_total`, and latency histograms)
 - Alertmanager: http://localhost:9093
-- Team incident inbox: http://localhost:9094
+- Team incident inbox: http://localhost:9194
 
 All listeners bind to loopback. "Production" is a separate local assessment environment, not a public
 internet service. HTTP cookies work here; a public deployment requires TLS with `TASKFLOW_HTTPS=1`,

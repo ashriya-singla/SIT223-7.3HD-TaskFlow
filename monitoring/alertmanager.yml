@@ -6,5 +6,5 @@ route:
 receivers:
   - name: local-team-inbox
     webhook_configs:
-      - url: http://127.0.0.1:9094/alerts
+      - url: http://127.0.0.1:9194/alerts
         send_resolved: true
