@@ -34,10 +34,10 @@ def service(name, command, cwd=None):
 
 service('inbox', [python, str(Path('scripts/inbox.py').resolve())])
 service('alertmanager', [os.environ['ALERTMANAGER_BIN'], '--config.file=alertmanager.yml',
-        '--storage.path=' + str(root / 'alertmanager'), '--web.listen-address=127.0.0.1:9093'],
+        '--web.external-url=http://localhost:9093', '--storage.path=' + str(root / 'alertmanager'), '--web.listen-address=127.0.0.1:9093'],
         str(Path('monitoring').resolve()))
 service('prometheus', [os.environ['PROMETHEUS_BIN'], '--config.file=prometheus.yml',
-        '--storage.tsdb.path=' + str(root / 'prometheus'), '--web.listen-address=127.0.0.1:9090'],
+        '--web.external-url=http://localhost:9090', '--storage.tsdb.path=' + str(root / 'prometheus'), '--web.listen-address=127.0.0.1:9090'],
         str(Path('monitoring').resolve()))
 
 

@@ -2,7 +2,7 @@
 import json
 import os
 from datetime import UTC, datetime
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 root = Path(os.environ['TASKFLOW_RUNTIME'])
@@ -34,4 +34,4 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(data[-20:], indent=2).encode())
 
 
-HTTPServer(('127.0.0.1', 9094), Handler).serve_forever()
+ThreadingHTTPServer(('127.0.0.1', 9094), Handler).serve_forever()
